@@ -1,232 +1,76 @@
-*{
-    margin:0;
-    padding:0;
-    justify-content: center;
-    align-items: center;
-    box-sizing:border-box;
-    font-family: 'Poppins', sans-serif;
-}
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather.io</title>
+    <link rel="icon" href="icon.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+</head>
 
-body{
-  position: relative;
-  height: auto;
-}
-
-#loading{
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  /* background: #fff url('./loader.gif')
-  no-repeat center; */
-  z-index: 99999;
-}
-
-.cont{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.one{
-    margin-top: 1.5em;
-    padding: 15px;
-    display: inline-block;
-    font-size: 20px;
-    box-shadow: 10px 10px 20px  rgba(0, 0, 0, 0.8);
-    overflow: hidden;
-    border-radius: 25px;
-    border-top: 2px solid rgba(255, 255, 255, 0.5);
-    border-left: 2px solid rgba(255, 255, 255, 0.5);
-    width: 30%;
-    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-    text-align: center;
-    opacity: 0.9;
-}
-
-@media only screen and (max-width: 768px) {
-   .one{
-     width: auto;
-   }
-}
-
-.two{
-  display:flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    margin-top: -4.8em;
-    box-sizing: border-box;
-}
-
-.three{
-    height:100vh;
-    display: flex;
-    align-items: center;
-    background: crimson;
-    font-size: 3em;
-}
-
-.card{
-  position: relative;
-  text-align: none;
-  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.7);
-  overflow: hidden;
-  border-radius: 25px;
-  background: rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-left: 1px solid rgba(255, 255, 255, 0.5);
-  color: black;
-  padding: 2em;
-  width: 100%;
-  max-width: 420px;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  margin: 1em;
-  backdrop-filter: blur(5px);
-}
-
-.search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  transform: translateZ(30px);
-}
-
-.icon {
-  animation: rotates 2.5s linear infinite alternate;
-}
-
-@keyframes rotates {
-  from {
-    transform: translate(-0.4em);
-  }
-  to {
-    transform: translate(0.4em);
-  }
-}
-
-button {
-  margin: 0.5em;
-  border-radius: 50%;
-  border: none;
-  height: 46px;
-  width: 46px;
-  outline: none;
-  background: black;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-}
-
-input.search-bar {
-  border: none;
-  outline: none;
-  padding: 0.5em 1em;
-  border-radius: 24px;
-  background: black;
-  color: black;
-  font-family: inherit;
-  font-size: 120%;
-  width: calc(70%);
-  background: rgba(0, 0, 0, 0.1);
-  transform: translateZ(30px);
-  border-top: 1px solid rgba(255, 255, 255, 0.8);
-  border-left: 1px solid rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(3px);
-}
-
-::placeholder {
-  color: black;
-  opacity: 0.7;
-}
-button:hover {
-  border: white 0.2em solid;
-  transition: 0.2s ease-in-out;
-}
-
-.card:after {
-  content: "";
-  display: block;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 11;
-  transform: translate3d(0, 0, 0);
-}
-
-@keyframes drift {
-  from {
-    transform: rotate(0deg);
-  }
-  from {
-    transform: rotate(360deg);
-  }
-}
-
-h2.city {
-  margin-top: 0.5em;
-  text-align: center;
-  font-size: 1.5em;
-  transform: translateZ(30px);
-}
-
-h1.temp {
-  margin: 0;
-  /* margin-bottom: 0.7em;   */
-  font-size: 2em;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin-left: 0.1em;
-  transform: translateZ(30px);
-}
-
-.description {
-  text-transform: capitalize;
-  margin-left: 8px;
-  /* font-size: 2em; */
-}
-
-.flex {
-  display: flex;
-  justify-content: left;
-}
-
-.other{
-    font-size: 1.2em;
-    font-weight: 500;
-    transform: translateZ(30px);
-}
-
-.weather.loading {
-  visibility: hidden;
-  max-height: 20px;
-  position: relative;
-  align-items: center;
-}
-
-.weather.loading:after {
-  /* visibility: visible; */
-  content: "Loading...";
-  color: white;
-  position: absolute;
-  /* top: 0; */
-  /* left: 20px; */
-}
-
-/* .name{
-    margin-top: 1em;
-    
-    font-size: 1.7em;
-    padding: 0.5em;
-    margin-left: 0%;
-    margin-top: 180%;
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    overflow: hidden;
-    border-radius: 25px;
-} */
-
+<body onload="myFunction()">
+    <div id="loading"></div>
+    <div class="cont">
+        <div class="one">
+            <h1>🌦️ Weather.io ☔️</h1>
+        </div>
+    </div>
+    <div class="two">
+        <div class="card">
+            <div class="search">
+                <input type="text" class="search-bar" placeholder="Search" />
+                <button>
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em"
+                        width="1.5em" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
+                            clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd"
+                            d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="weather loading">
+                <h2 class="city">Weather in Mumbai</h2>
+                <h1 class="temp">51°C</h1>
+                <div class="flex">
+                    <img src="https://openweathermap.org/img/wn/04d.png" alt="" class="icon" />
+                    <div class="description">Cloudy</div>
+                </div>
+                <div class="other">
+                    <div class="humidity">Humidity: 60%</div>
+                    <div class="wind">Wind Speed: 6.2 km/h</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="three">
+        <h1>Related News </h1>
+        <h5>   Coming soon....</h5>
+    </div>
+    <script>
+        var preloader = document.getElementById('loading');
+        function myFunction() {
+            preloader.style.display = 'none';
+        }
+    </script>
+    <script type="text/javascript" src="./vanilla-tilt.js"></script>
+    <script type="text/javascript">
+        VanillaTilt.init(document.querySelector(".card"), {
+            max: 15,
+            glare: true,
+            reverse: true,
+            "max-glare": 0.5,
+            speed: 400
+        });
+        VanillaTilt.init(document.querySelectorAll(".card"));
+    </script>
+</body>
