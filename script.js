@@ -29,6 +29,8 @@ let weather = {
       "url('https://source.unsplash.com/1600x900/?city " + name + "')";
     document.body.style.backgroundRepeat = "none";
     document.body.style.backgroundSize = "100";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
   },
   search: function () {
     this.fetchWeather(document.querySelector(".search-bar").value);
